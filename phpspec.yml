@@ -1,0 +1,4 @@
+suites:
+  library_suite:
+    namespace: Carawebs\Blog\Tests
+    psr4_prefix: Carawebs\Blog\Tests

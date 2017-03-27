@@ -3,7 +3,6 @@
 namespace Carawebs\Blog\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carawebs\Blog\Models\Post;
 use Carawebs\Blog\Requests\StoreBlogPost;
@@ -23,7 +22,7 @@ class PostController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function index(Request $request)
+    public function index()
     {
         // Get articles, order by latest on column 'published_at', but only get records where 'published_at' time is <= now.
         //$articles = Post::latest('published_at')->where('published_at', '<=', Carbon::now())->get();
@@ -76,9 +75,10 @@ class PostController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function show($id)
+    // public function show($id)
+    public function show(Post $post)
     {
-        $article = Post::findOrFail($id);
+        $article = $post; //Post::findOrFail($id);
         $current_user = Auth::user();
         return view('blog::posts.show', compact('article', 'current_user'));
     }

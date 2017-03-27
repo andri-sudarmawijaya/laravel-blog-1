@@ -18,11 +18,14 @@ class BlogProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         $this->loadViewsFrom(__DIR__.'/views', 'blog');
-        // Register method: `Illuminate\Foundation\Application::register()`
+
+
         $this->app->register(HtmlServiceProvider::class);
-        // AliasLoader: `Illuminate\Foundation\AliasLoader::getInstance()`
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Form', '\Collective\Html\FormFacade');
+        // $loader = AliasLoader::getInstance();
+        // $loader->alias('Form', '\Collective\Html\FormFacade');
+        AliasLoader::getInstance(['Form'=>'\Collective\Html\FormFacade']);
+
+
         // $this->mergeConfigFrom(__DIR__.'/config/blog.php', 'blog.providers');
         // $this->mergeConfigFrom(__DIR__.'/config/blog.php', 'blog.aliases');
     }

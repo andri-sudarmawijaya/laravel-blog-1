@@ -7,10 +7,8 @@ Add the package service provider to the `providers` array on `/config/app.php`:
 ~~~php
 // /config/app.php
 'providers' => [
-
     // Blog Package
     Carawebs\Blog\BlogProvider::class
-
 ];
 ~~~
 

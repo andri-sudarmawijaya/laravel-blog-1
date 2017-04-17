@@ -4,7 +4,7 @@ namespace Carawebs\Blog\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Carawebs\Blog\Models\Post;
+use Carawebs\Blog\Models\BlogPost;
 use Carawebs\Blog\Requests\StoreBlogPost;
 use Carawebs\Blog\Requests\UpdateBlogPost;
 //use App\Tag;
@@ -24,15 +24,7 @@ class PostController extends Controller
     */
     public function index()
     {
-        // Get articles, order by latest on column 'published_at', but only get records where 'published_at' time is <= now.
-        //$articles = Post::latest('published_at')->where('published_at', '<=', Carbon::now())->get();
-
-        // Use a query scope instead: set up `scopePublished()` in the Posts Model
-        //$articles = Post::latest('published_at')->published()->get();
-
-        // Use the same query scope but also eager load the user who owns the article
-        //$articles = Post::with('user')->latest('published_at')->published()->get();
-        $articles = Post::with('user')->latest('updated_at')->get();
+        $articles = BlogPost::with('user')->latest('updated_at')->get();
         $current_user = Auth::user();
         return view('blog::posts.index', compact('articles', 'current_user'));
     }
@@ -57,7 +49,7 @@ class PostController extends Controller
     public function store(StoreBlogPost $request)
     {
         $request['slug'] = str_slug($request->title, '-');
-        $post = new Post();
+        $post = new BlogPost();
         $post->title = $request->title;
         $post->content = $request->content;
         $post->excerpt = $request->excerpt;
@@ -92,7 +84,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $tags = NULL;//Tag::pluck('name', 'id');
-        $article = Post::findOrFail($id);
+        $article = BlogPost::findOrFail($id);
         return view('blog::posts.edit', compact('article', 'tags'));
     }
 
@@ -105,7 +97,7 @@ class PostController extends Controller
     */
     public function update(UpdateBlogPost $request, $id)
     {
-        $article = Post::findOrFail($id);
+        $article = BlogPost::findOrFail($id);
         $article->update($request->all());
         //$article->thumbnail = $this->storeImageS3($request, $article);
         $this->syncTags($article, $request->input('tag_list'));
@@ -121,7 +113,7 @@ class PostController extends Controller
     */
     public function destroy($id)
     {
-        Post::destroy($id);
+        BlogPost::destroy($id);
         return redirect()->route('posts.index');
     }
 
@@ -148,7 +140,7 @@ class PostController extends Controller
     * @param  Post $article Post object
     * @param  array   $tags    $request->input('tag_list')
     */
-    private function syncTags(Post $article, $tags = [])
+    private function syncTags(BlogPost $article, $tags = [])
     {
         if (empty($tags)) {
             return;
@@ -170,7 +162,7 @@ class PostController extends Controller
         // dd($request->all());
         $article = Auth::user()
         ->posts()
-        ->save(new Post($request->all()));
+        ->save(new BlogPost($request->all()));
 
         // OR
         //Auth::user()->articles()->create($request->all());

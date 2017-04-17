@@ -7,7 +7,7 @@
         <div class="col-md-8">
             @include ('blog::errors.list')
             {{-- Uses a named route ------------------------------------------}}
-            {!! Form::open(['route'=>['posts.store', 'store'], 'files'=>true]) !!}
+            {!! Form::open(['route'=>['posts.store'], 'files'=>true]) !!}
             @include('blog::posts.form', ['submitButtonText' => 'Create Post'])
             {!! Form::close() !!}
 

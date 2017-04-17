@@ -4,10 +4,12 @@ namespace Carawebs\Blog\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Define POst model.
+ * Define Post model.
  */
-class Post extends Model
+class BlogPost extends Model
 {
+    //protected $table = 'blog_posts';
+
     protected $fillable = [
       'title',
       'content',
@@ -30,5 +32,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany('BlogImage');
     }
 }

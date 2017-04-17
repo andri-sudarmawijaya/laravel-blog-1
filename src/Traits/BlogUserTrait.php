@@ -14,6 +14,6 @@ trait BlogUserTrait
      */
     public function posts()
     {
-      return $this->hasMany('Carawebs\Blog\Models\Post');
+      return $this->hasMany('Carawebs\Blog\Models\BlogPost');
     }
 }

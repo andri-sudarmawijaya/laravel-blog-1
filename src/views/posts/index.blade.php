@@ -21,35 +21,35 @@
                         <a href="{!! action('\Carawebs\Blog\Controllers\PostController@show', ['id' => $article->id]) !!}" class="">More &raquo;</a>
                     </p>
                 </article>
+                {{-- {{dd($article->user->name)}} --}}
                 <h5>Owner: {{ $article->user->name }}</h5>
                 <p>
                     <a href="{!! action('\Carawebs\Blog\Controllers\PostController@show', ['id' => $article->id]) !!}" class="btn btn-default btn-sm">More &raquo;</a>
-                    @if( $current_user->id === $article->user->id )
-                        <a href="{!! action('\Carawebs\Blog\Controllers\PostController@edit', ['id' => $article->id]) !!}" class="btn btn-default btn-sm">Edit &raquo;</a>
-                        {!! Form::open(['method' => 'DELETE',
-                            'route' => ['posts.destroy', $article->id],
-                            'id' => 'form-delete-articles-' . $article->id]) !!}
-                            <a href="" class="data-delete"
-                            data-title="{{$article->title}}"
-                            data-form="articles-{{ $article->id }}">
-                            <i class="glyphicon glyphicon-remove icon-spacer"></i> &nbsp;Delete</a>
-                            {!! Form::close() !!}
-                        @endif
-                    </p>
-                </div>
-                <hr>
+                    @if( !empty($current_user) && $current_user->id === $article->user->id )
+                        <a href="{!! action('\Carawebs\Blog\Controllers\PostController@edit', ['id' => $article->id]) !!}" class="btn btn-default btn-sm">
+                            Edit &raquo;
+                        </a>
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['posts.destroy', $article->id], 'id' => 'form-delete-articles-' . $article->id]) !!}
+                        <a href="" class="data-delete" data-title="{{$article->title}}" data-form="articles-{{ $article->id }}">
+                            <i class="glyphicon glyphicon-remove icon-spacer"></i> &nbsp;Delete
+                        </a>
+                        {!! Form::close() !!}
+                    @endif
+                </p>
             </div>
-        @endforeach
-    @stop
-    @push('footer-jquery-scripts')
-        <script>
-        $(function () {
-            $('.data-delete').on('click', function (e) {
-                var resourceTitle = $(this).data('title');
-                if (!confirm('Are you sure you want to delete ' + resourceTitle + '?')) return;
-                e.preventDefault();
-                $('#form-delete-' + $(this).data('form')).submit();
-            });
+            <hr>
+        </div>
+    @endforeach
+@stop
+@push('footer-jquery-scripts')
+    <script>
+    $(function () {
+        $('.data-delete').on('click', function (e) {
+            var resourceTitle = $(this).data('title');
+            if (!confirm('Are you sure you want to delete ' + resourceTitle + '?')) return;
+            e.preventDefault();
+            $('#form-delete-' + $(this).data('form')).submit();
         });
-        </script>
-    @endpush
+    });
+    </script>
+@endpush

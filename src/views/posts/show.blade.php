@@ -3,6 +3,11 @@
 @section('content')
     <h1>{{ $article->title }}</h1>
     <h2>By: {{ $article->user->name }}</h2>
+
+    @foreach ($article->images as $element)
+        <h2>{{$element->filePath}}</h2>
+        {{var_dump($element)}}
+    @endforeach
     {{-- @if (isset($article->thumbnail))
     <img src="{{URL::asset( $article->thumbnail )}}" alt="" class="img-responsive"/>
 @endif --}}

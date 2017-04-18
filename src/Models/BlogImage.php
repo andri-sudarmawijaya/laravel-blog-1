@@ -1,6 +1,7 @@
 <?php
 namespace Carawebs\Blog\Models;
 
+use Carawebs\Blog\Models\BlogPost;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,6 +33,6 @@ class BlogImage extends Model
 
     public function posts()
     {
-        return $this->belongsToMany('BlogPost', 'blog_image_post', 'image_id', 'post_id');
+        return $this->belongsToMany('\Carawebs\Blog\Models\BlogPost', 'blog_image_post', 'image_id', 'post_id')->withTimestamps();
     }
 }

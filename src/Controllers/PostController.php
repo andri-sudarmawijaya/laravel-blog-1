@@ -67,10 +67,11 @@ class PostController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    // public function show($id)
-    public function show(Post $post)
+    public function show($id)
+    // public function show(BlogPost $post)
     {
-        $article = $post; //Post::findOrFail($id);
+        // $article = $post; //Post::findOrFail($id);
+        $article = BlogPost::with('images')->findOrFail($id);
         $current_user = Auth::user();
         return view('blog::posts.show', compact('article', 'current_user'));
     }

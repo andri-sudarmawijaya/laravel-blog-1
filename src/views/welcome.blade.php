@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Welcome {{ $user->name }}</h1>
+    {{var_dump($img)}}
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -25,6 +26,6 @@
         <input type="file" name="avatar"></input>
         <button type="submit" name="button">Save Avatar</button>
     </form>
-    <img src="https://s3-eu-west-1.amazonaws.com/carawebs-test-laravel/avatars/{{ $user->id }}/avatar.jpeg" alt="" class="img-responsive">
+    <img src="https://s3-eu-west-1.amazonaws.com/carawebs-test-laravel/avatars/{{ $user->id }}/avatar.jpg" alt="" class="img-responsive">
     <br>
 @stop

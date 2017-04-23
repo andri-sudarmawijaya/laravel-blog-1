@@ -21,9 +21,11 @@ class BlogProvider extends ServiceProvider
 
 
         $this->app->register(HtmlServiceProvider::class);
+        $this->app->register(\Intervention\Image\ImageServiceProvider::class);
         // $loader = AliasLoader::getInstance();
         // $loader->alias('Form', '\Collective\Html\FormFacade');
         AliasLoader::getInstance(['Form'=>'\Collective\Html\FormFacade']);
+        AliasLoader::getInstance(['Image'=>'\Intervention\Image\ImageServiceProvider']);
 
 
         // $this->mergeConfigFrom(__DIR__.'/config/blog.php', 'blog.providers');

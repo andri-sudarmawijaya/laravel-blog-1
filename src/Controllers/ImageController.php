@@ -16,7 +16,7 @@ class ImageController extends Controller
         ]);
 
         $file = request()->file('avatar');
-        $ext = $file->guessClientExtension();
+        $ext = $file->guessExtension();
         $path = $file->storeAs('avatars/' . Auth::user()->id, "avatar.$ext", 's3');
         $path = Storage::disk('s3')->url($path);
         return back()

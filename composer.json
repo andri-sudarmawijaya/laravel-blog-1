@@ -2,7 +2,7 @@
     "name": "bantenprov/laravel-blog",
     "autoload": {
         "psr-4": {
-            "Carawebs\\Blog\\": "src/"
+            "Bantenprov\\Blog\\": "src/"
         }
     },
     "require": {
@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Carawebs\\Blog\\Tests\\": "tests/"
+            "Bantenprov\\Blog\\Tests\\": "tests/"
         }
     }
 }

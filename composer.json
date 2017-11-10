@@ -6,7 +6,7 @@
         }
     },
     "type": "library",
-	"homepage": "https://github.com/bantenprov/laravel-blog",
+     "homepage": "https://github.com/bantenprov/laravel-blog",
     "license": "MIT",
     "require": {
         "illuminate/support": "5.4.*",

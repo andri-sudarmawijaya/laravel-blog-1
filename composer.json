@@ -1,5 +1,5 @@
 {
-    "name": "carawebs/laravel-blog",
+    "name": "bantenprov/laravel-blog",
     "autoload": {
         "psr-4": {
             "Carawebs\\Blog\\": "src/"
